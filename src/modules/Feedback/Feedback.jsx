@@ -1,5 +1,9 @@
 import { Component } from 'react';
-import styles from './Feedback.modules.scss';
+import Section from './Section/Section';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import Statistics from './Statistics/Statistics';
+
+import styles from './Feedback.module.scss';
 
 class Feedback extends Component {
   state = {
@@ -23,60 +27,32 @@ class Feedback extends Component {
     return Number(result);
   }
 
-  getVoteGood = () => {
+  onLeaveFeedback = propName => {
     this.setState(prevState => {
-      console.log(prevState);
-      return { good: prevState.good + 1 };
-    });
-  };
-
-  getVoteNeutral = () => {
-    this.setState(prevState => {
-      console.log(prevState);
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-
-  getVoteBad = () => {
-    this.setState(prevState => {
-      console.log(prevState);
-      return { bad: prevState.bad + 1 };
+      return { [propName]: prevState[propName] + 1 };
     });
   };
 
   render() {
     const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
-    const goodParcentage = this.countPositiveFeedbackPercentage('good');
+    const positivePercentage = this.countPositiveFeedbackPercentage('good');
 
     return (
-      <div>
-        <h1 className={styles.title}>Feedback Form</h1>
-        <div className={styles.wrapper}>
-          <div className={styles.block}>
-            <h2 className={styles.blockTitle}>Please leave feedback</h2>
-            <button onClick={this.getVoteGood} className={styles.button}>
-              Good
-            </button>
-            <button onClick={this.getVoteNeutral} className={styles.button}>
-              Neutral
-            </button>
-            <button onClick={this.getVoteBad} className={styles.button}>
-              Bad
-            </button>
-          </div>
-          <div className={styles.block}>
-            <h2 className={styles.blockTitle}>Statistics</h2>
-            <p className={styles.statisitcsVote}>Good: {good}</p>
-            <p className={styles.statisitcsVote}>Neutral: {neutral}</p>
-            <p className={styles.statisitcsVote}>Bad: {bad}</p>
-            <p className={styles.statisitcsVote}>Total: {total}</p>
-            <p className={styles.statisitcsVote}>
-              Positive feedback: {goodParcentage}
-            </p>
-          </div>
-        </div>
-      </div>
+      <>
+        <Section title="Please leave feedback">
+          <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
+        </Section>
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
+        </Section>
+      </>
     );
   }
 }
