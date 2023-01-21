@@ -1,20 +1,17 @@
+import PropTypes from 'prop-types';
 import Button from 'sharerd/components/Button/Button';
-import styles from '../Feedback.module.scss';
 
-const FeedbackOptions = ({ onLeaveFeedback }) => {
-  return (
-    <>
-      <Button onClick={() => onLeaveFeedback('good')} type="button">
-        Good
-      </Button>
-      <Button onClick={() => onLeaveFeedback('neutral')} type="button">
-        Neutral
-      </Button>
-      <Button onClick={() => onLeaveFeedback('bad')} type="button">
-        Bad
-      </Button>
-    </>
-  );
+const FeedbackOptions = ({ onLeaveFeedback, options }) => {
+  return options.map(name => (
+    <Button key={name} onClick={() => onLeaveFeedback(name)} type="button">
+      {name}
+    </Button>
+  ));
 };
 
 export default FeedbackOptions;
+
+FeedbackOptions.propTypes = {
+  onLeaveFeedback: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
