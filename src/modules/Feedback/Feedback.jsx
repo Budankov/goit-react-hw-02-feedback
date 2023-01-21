@@ -4,8 +4,6 @@ import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
 import Notification from '../../sharerd/components/Notification/Notification';
 
-import styles from './Feedback.module.scss';
-
 class Feedback extends Component {
   state = {
     good: 0,
