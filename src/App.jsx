@@ -1,6 +1,6 @@
 import Feedback from './modules/Feedback/Feedback';
 
-import './sharerd/styles/styles.scss';
+import './utils/styles/styles.scss';
 
 export const App = () => {
   return (

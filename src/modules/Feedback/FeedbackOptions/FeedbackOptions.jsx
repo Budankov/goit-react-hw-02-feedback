@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Button from 'sharerd/components/Button/Button';
+import Button from 'utils/components/Button/Button';
 
 const FeedbackOptions = ({ onLeaveFeedback, options }) => {
   return options.map(name => (
