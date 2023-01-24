@@ -22,8 +22,7 @@ class Feedback extends Component {
       return 0;
     }
     const value = this.state[propName];
-    const result = ((value / total) * 100).toFixed(2);
-    return Number(result);
+    return Math.round((value / total) * 100);
   }
 
   onLeaveFeedback = propName => {
